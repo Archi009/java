@@ -29,8 +29,7 @@ public class Variable1 {
 		for (int i = 0; i < anotherAry.length; i++) {
 			anotherAry[i] = (int) (Math.random() * 100) ;  // 강제형변환 
 		}
-		//수수수수수수정
-		
+				
 		//배열 출력
 		for(int num : anotherAry) {      //배열의 반복문 javascript의 forEach와 비슷 for in도?
 			System.out.println(num);
