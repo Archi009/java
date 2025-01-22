@@ -36,7 +36,7 @@ public class Todo2 {
 						String name = listOfriends[i].split(",")[0];
 						String phone = listOfriends[i].split(",")[1];
 						String sex = listOfriends[i].split(",")[2];
-						System.out.printf("%4s  %13s  %1s \n", name, phone, sex);
+						System.out.printf("%-5s %s %s \n", name, phone, sex);
 
 					}
 				}
@@ -62,10 +62,7 @@ public class Todo2 {
 						if (sex.trim().equals(searchSex)) {
 							System.out.printf("%4s자는  %s \n",  sex , listOfriends[i]);
 						}
-					} else {	
-						System.out.println("존재하지 않습니다.");
-						break;
-					}
+					} 
 				}
 				break;
 
