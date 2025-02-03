@@ -153,7 +153,7 @@ public class Calculator {
 //		System.out.println(dayOfWeek);
 		
 		for (int i = 0; i < dayOfWeek; i++) {
-			System.out.print("   ");			//요일만큼 빈칸을 그린다.
+			System.out.print("    ");			//요일만큼 빈칸을 그린다.
 		}
 		
 		for (int i = 1; i < lastDay; i++) {
