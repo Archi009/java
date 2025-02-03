@@ -91,7 +91,8 @@ public class BoardExe {
 		} // end of while
 
 	}// end of boardList()
-		// 배열을 매개값으로 전달하면 건수가 몇건인가 반환.
+
+	// 배열을 매개값으로 전달하면 건수가 몇건인가 반환.
 
 	public static int getMaxCnt() {
 		int count = 0;
@@ -106,34 +107,35 @@ public class BoardExe {
 	public static void addBoard() {
 		// 글등록.
 //		제목 : 5글자 이상 15글자 이하. 콘솔 출력("등록불가합니다");
-//		동일한 제목 있을시 콘솔 출력("이미 있는 제목입니다");
+//		동일한 제목 있을시 콘솔 출력("이미 있는 제목입니다"); 
 		System.out.println("제목을 입력 >>");
 		String title = scn.nextLine();
-		
+
 //		유효성 검사
 //		제목길이
-		if (title.length() >= 5 && title.length() <= 15) {
-//			
-			for (int i = 0; i < boardRepo.length; i++) {
-				if (boardRepo[i] == null) {
-					for (int j = 0; j < boardRepo.length; j++) {
+	
+		if (title.length() < 5 || title.length() > 15) {
+			System.out.println("등록 불가합니다.");
+			return;
+		}
+
+		for (int j = 0; j < boardRepo.length; j++) {
+			if (boardRepo[j] == null) {
+				for (int i = 0; i < boardRepo.length; i++) {
+					if (boardRepo[i] != null && title.equals(boardRepo[i].getTitle())) {
 						
-						if (boardRepo[j].getTitle().equals(title)) {
-							System.out.println("이미 있는 제목입니다.");
-							return;
-						}else if(boardRepo[j] != null){
-							System.out.println("내용을 입력 >>");
-							String content = scn.nextLine();
-							boardRepo[j] = new Board(title, content, loginId, new Date());
-							System.out.println("등록완료");
-							break;
-						}
+						System.out.println("이미 있는 제목입니다.");
+						
+						return;
 					}
 				}
+				System.out.println("내용을 입력 >>");
+				String content = scn.nextLine();
+				boardRepo[j] = new Board(title, content, loginId, new Date());
+				System.out.println("등록완료");
+				return;
 			}
-		} else {
-			System.out.println("등록불가합니다.");
-			return;
+
 		}
 
 //		Date writeDate = new Date();
