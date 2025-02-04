@@ -119,21 +119,21 @@ public class BoardExe {
 			return;
 		}
 
-		for (int j = 0; j < boardRepo.length; j++) {
-			if (boardRepo[j] == null) {
-				for (int i = 0; i < boardRepo.length; i++) {
-					if (boardRepo[i] != null && title.equals(boardRepo[i].getTitle())) {
+		for (int j = 0; j < boardRepo.length; j++) {  //boardReop 의 길이 만큼 반복문을 실행한다.
+			if (boardRepo[j] == null) {				//0~end 순서대로 boardReop 안의 값이 null 인지 확인한다.(빈곳에 값을 입력하기위해)
+				for (int i = 0; i < boardRepo.length; i++) {	//null인곳에 값을 넣기전에 중복검사를 한다.
+					if (boardRepo[i] != null && title.equals(boardRepo[i].getTitle())) { //비교를 하기위해선 비교값이 null이어선 안된다.
 						
 						System.out.println("이미 있는 제목입니다.");
 						
-						return;
+						return;                               //원하는 값을(중복값을 찾았다)면 함수 자체를 끝내기위해 return 한다.
 					}
 				}
-				System.out.println("내용을 입력 >>");
+				System.out.println("내용을 입력 >>");			//중복값이 없다면, 등록을 진행한다. 
 				String content = scn.nextLine();
 				boardRepo[j] = new Board(title, content, loginId, new Date());
 				System.out.println("등록완료");
-				return;
+				return;										//등록을 했다고해도 여전히 for문 안에 있으므로 그대로 두면 상관없는 연산을 한다. return으로 함수를 끝내자.
 			}
 
 		}

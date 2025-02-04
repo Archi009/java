@@ -1,13 +1,15 @@
 package com.yedam.reference;
 
 import java.util.Scanner;
-
+/*
+ *  main 담고있는 실행클래스.
+ * */
 public class StudentExe {
 	public static void main(String[] args) {
 		Student[] students = new Student[5];
 		
 		Student std1 = new Student("홍길동",80,80);
-		
+		std1.gender = Gender.MEN;			//gender와 같이 특정값을 부르는 용어가 여럿일때(남, 남자 ,male ,m) String으로 하면 불편함 => 열거형 데이터 타입을 사용한다.
 //		std1.studentNm = "홍길동";
 //		std1.enScore = 80;
 //		std1.mathScore = 50;
@@ -15,12 +17,15 @@ public class StudentExe {
 		Student std2 = new Student("김민수",50);
 //		std2.studentNm = "김민수";
 //		std2.enScore = 50;
-		std1.mathScore = 88;
+		std2.mathScore = 88;
+		std2.gender = Gender.MEN;
 
 		Student std3 = new Student("홍정학");
 //		std3.studentNm = "홍정학";
 		std3.enScore = 80;
 		std3.mathScore = 90;
+		std3.gender = Gender.WOMEN;
+
 		
 		students[0] = std1;
 		students[1] = std2;
@@ -34,7 +39,9 @@ public class StudentExe {
 		System.out.println(students[0] instanceof Student);
 		
 		for (int i = 0; i < students.length; i++) {
-			if (students[i] !=null && students[i].getAvg(students[i]) >= 85) {
+			
+			if (students[i] !=null && //students[i].getAvg(students[i]) >= 85
+					students[i].gender == Gender.MEN) { 
 				students[i].printInfo();
 //				System.out.printf("이름은 %s 영어점수는 %d 수학점수는 %d \n" ,students[i].studentNm,students[i].enScore,students[i].mathScore);
 			}
