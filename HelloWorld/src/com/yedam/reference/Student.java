@@ -12,7 +12,7 @@ public class Student {
 	Student() { // 기본 생성자: 매개값이 없는 생성자.
 	}
 
-	Student(String studentNm) {
+	public Student(String studentNm) {
 		this.studentNm = studentNm;
 
 	}
@@ -30,7 +30,7 @@ public class Student {
 	}
 
 	// 메소드 (기능)
-	void printInfo() { // 클래스내부의 정보 출력
+	public void printInfo() { // 클래스내부의 정보 출력
 		System.out.printf("이름은 %s, 영어점수는 %d, 수학점수는 %d \n", studentNm, enScore, mathScore);
 	}
 
