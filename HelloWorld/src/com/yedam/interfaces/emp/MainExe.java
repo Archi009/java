@@ -14,6 +14,7 @@ public class MainExe {
 //		스캐너, run
 		Scanner scn = new Scanner(System.in);
 		boolean run = true;
+//		boolean runAry = false;
 		int eNum = 0;
 		String eName = "";
 		String phNo = "";
@@ -21,8 +22,26 @@ public class MainExe {
 		int sal = 0;
 //		배열, 컬렉션
 
-		EmpDAO dao = new EmpListExe();
-		EmpDAO daoo = new EmpAryExe();
+		EmpDAO dao;
+
+		while (true) {
+			System.out.println("1.ver.Collection | 2.ver.Array");
+			System.out.println("선택 >> ");
+			int selecVer = Integer.parseInt(scn.nextLine());
+			if (selecVer < 1 || selecVer > 2) {
+				System.out.println("유효한 값 선택하세요.");
+				continue;
+			} else if (selecVer == 1) {
+				dao = new EmpListExe();
+
+				break;
+			} else {
+				dao = new EmpAryExe();
+
+				break;
+			}
+
+		}
 
 		while (run) {
 			System.out.println("1.추가 2.수정 3.삭제 4.조회 9.종료");
@@ -54,17 +73,17 @@ public class MainExe {
 				phNo = scn.nextLine();
 				System.out.println("입사일자 >> ");
 				hdate = scn.nextLine();
-				if(hdate.equals("")) {
+				if (hdate.equals("")) {
 					hdate = "1900-01-01";
 				}
 				System.out.println("급여 >> ");
 				String salString = scn.nextLine();
 //				공백 입력시 오류 대신 그냥 넘어가기위한 작업
-				if(salString.equals("")) {
+				if (salString.equals("")) {
 					salString = "0";
 				}
 				sal = Integer.parseInt(salString);
-				
+
 				if (dao.modfyEmp(new Employee(eNum, "", phNo, hdate, sal))) {
 					System.out.println("수정성공");
 					break;
@@ -93,33 +112,31 @@ public class MainExe {
 //				
 //				Employee emp = new Employee();
 //				emp.setSalary(sal);
-				///이름으로 조회////
+				/// 이름으로 조회////
 				System.out.println("조회 이름 >> ");
 				eName = scn.nextLine();
-				
-				
+
 				Employee emp = new Employee();
 				emp.setEmpNm(eName);
 //				조회결과
 				Employee[] result = dao.search(emp);
 				/////////////////////////////////////////
-				Employee[] result1 = daoo.search(emp);
+
 //				출력
 				System.out.println(" 사번   이름    연락처    급여");
 				System.out.println("---------------------------");
-				for(Employee empl : result1) {
-					if(empl != null ) {
+				for (Employee empl : result) {
+					if (empl != null) {
 						System.out.println(empl.empInfo());
 					}
 				}
-				
-				
+
 				break;
 			case 9:
 				// 종료
 				System.out.println("종료한합니닫");
-				run =  false;
-				
+				run = false;
+
 				break;
 			default:
 				break;

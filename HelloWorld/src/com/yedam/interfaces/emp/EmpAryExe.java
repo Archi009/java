@@ -1,8 +1,11 @@
 package com.yedam.interfaces.emp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
 public class EmpAryExe implements EmpDAO {
 
-	Employee[] employees  = new Employee[10];
+	Employee[] employees = new Employee[10];
 
 	public EmpAryExe() {
 //		초기값
@@ -14,19 +17,56 @@ public class EmpAryExe implements EmpDAO {
 
 	@Override
 	public boolean registerEmp(Employee emp) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < employees.length; i++) {
+			if (employees[i] == null) {
+				employees[i] = emp;
+				return true;
+			}
+		}
+
 		return false;
 	}
 
 	@Override
 	public boolean modfyEmp(Employee emp) {
-		// TODO Auto-generated method stub
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		for (int i = 0; i < employees.length; i++) {
+//			사원비교
+			if (employees[i].getEmpNo() == emp.getEmpNo()) {
+				if (!emp.getTelNo().equals("")) {
+					employees[i].setTelNo(emp.getTelNo());
+				}
+				try {
+//					공백을 입력했을때 의미없는 값(1900-01-01)을 넘겨서 의미없는 값일때는 수정이 일어나지 않도록
+					if (!emp.getHireDate().equals(sdf.parse("1900-01-01"))) {
+						employees[i].setHireDate(emp.getHireDate());
+					}
+				} catch (ParseException e) {
+
+					e.printStackTrace();
+
+				}
+				if (emp.getSalary() != 0) {
+					employees[i].setSalary(emp.getSalary());
+				}
+				return true; // 정상 수정
+			}
+
+		}
+
 		return false;
 	}
 
 	@Override
 	public boolean removeEmp(int empNo) {
-		// TODO Auto-generated method stub
+		for (int i = 0; i < employees.length; i++) {
+//			사원비교
+			if (employees[i].getEmpNo() == empNo) {
+				employees[i] = null;
+				return true; // 정상 삭제
+			}
+
+		}
 		return false;
 	}
 
@@ -35,8 +75,8 @@ public class EmpAryExe implements EmpDAO {
 		Employee[] result = new Employee[100];
 		int idx = 0;
 		for (int i = 0; i < employees.length; i++) {
-			
-			if (employees[i]!=null && employees[i].getEmpNm().indexOf(emp.getEmpNm()) > -1 ) {
+
+			if (employees[i] != null && employees[i].getEmpNm().indexOf(emp.getEmpNm()) > -1) {
 				result[idx] = employees[i];
 				idx++;
 			}
