@@ -22,6 +22,7 @@ public class MainExe {
 //		배열, 컬렉션
 
 		EmpDAO dao = new EmpListExe();
+		EmpDAO daoo = new EmpAryExe();
 
 		while (run) {
 			System.out.println("1.추가 2.수정 3.삭제 4.조회 9.종료");
@@ -101,10 +102,12 @@ public class MainExe {
 				emp.setEmpNm(eName);
 //				조회결과
 				Employee[] result = dao.search(emp);
+				/////////////////////////////////////////
+				Employee[] result1 = daoo.search(emp);
 //				출력
 				System.out.println(" 사번   이름    연락처    급여");
 				System.out.println("---------------------------");
-				for(Employee empl : result) {
+				for(Employee empl : result1) {
 					if(empl != null ) {
 						System.out.println(empl.empInfo());
 					}
