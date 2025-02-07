@@ -1,6 +1,9 @@
 package com.yedam.interfaces.emp;
 
+import java.net.DatagramSocket;
 import java.util.InputMismatchException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 /*
@@ -68,15 +71,22 @@ public class MainExe {
 						Employee emp = new Employee();
 						emp.setEmpNm("");
 //						조회결과
-						Employee[] result = dao.search(emp);
+//						Dao 의 매소드 반환값이 Employee[]일때
+//						Employee[] result = dao.search(emp);
 	
-						for (int i = 0; i <result.length;i++) {
-							if (result[i] == null) {
-								
-								eNum = result[i-1].getEmpNo() + 1 ;
-								break;
-							}
-						} 
+//						for (int i = 0; i <result.length;i++) {
+//							if (result[i] == null) {
+//								
+//								eNum = result[i-1].getEmpNo() + 1 ;
+//								break;
+//							}
+//						} 
+						
+//						Dao 의 매소드 반환값이 List<Employee> 일때
+						List<Employee> result = dao.search(emp);
+						
+						eNum = result.get(result.size()-1).getEmpNo() + 1 ;
+					
 						System.out.println("유효한 값을 입력하지 않아" + eNum + "을 부여합니다.");
 						break;
 					}
@@ -143,7 +153,10 @@ public class MainExe {
 				Employee emp = new Employee();
 				emp.setEmpNm(eName);
 //				조회결과
-				Employee[] result = dao.search(emp);
+//				DAO의 메소드 반환값이 Employee[]일때
+//				Employee[] result = dao.search(emp);
+//				DAO의 메소드 반환값이 List<Employee>일때
+				List<Employee> result = dao.search(emp);
 				/////////////////////////////////////////
 
 //				출력

@@ -67,10 +67,11 @@ public class EmpListExe implements EmpDAO {
 	}
 
 	@Override
-	public Employee[] search(Employee emp) {
+	public List<Employee> search(Employee emp) {
 		// sal보다 급여 많은것 조회
 
-		Employee[] result = new Employee[100];
+//		Employee[] result = new Employee[100];
+		List<Employee> result = new ArrayList<Employee>();
 
 		/// 급여 조회///
 //		int idx = 0;
@@ -92,11 +93,12 @@ public class EmpListExe implements EmpDAO {
 //		}
 		
 //		indexOf를 이용한 방법
-		int idx = 0;
+//		int idx = 0;
 		for (int i = 0; i < empList.size(); i++) {
 			if (empList.get(i).getEmpNm().indexOf(emp.getEmpNm()) > -1) {
-				result[idx] = empList.get(i);
-				idx++;
+//				result[idx] = empList.get(i);
+//				idx++;
+				result.add(empList.get(i));
 			}
 		}
 
