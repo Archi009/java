@@ -64,7 +64,7 @@ public class EmpAryExe implements EmpDAO {
 		for (int i = 0; i < employees.length; i++) {
 //			사원비교
 			if (employees[i].getEmpNo() == empNo) {
-				employees[i] = null;
+	   			employees[i] = null;
 				return true; // 정상 삭제
 			}
 
