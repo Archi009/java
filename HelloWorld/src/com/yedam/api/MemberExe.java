@@ -8,8 +8,8 @@ public class MemberExe {
 
 		// 비교 연산자 : 참조값 비교
 
-		System.out.println(o1 == o2);
-		System.out.println(o1.equals(o2));
+		System.out.println(o1 == o2);        //false
+		System.out.println(o1.equals(o2));	 //false
 
 		Member m1 = new Member();
 		m1.memberId = "user01";
@@ -20,19 +20,21 @@ public class MemberExe {
 
 		String h1 = "Hello";
 		String h2 = "Hello";
-		String s1 = new String("Hello");
-		String s2 = new String("Hello");
+		String s1 = new String("Hello");      
+		String s2 = new String("Hello");      
 
-		System.out.println(m1 == m2);
-		System.out.println(s1 == s2);
-		System.out.println(m1.equals(s2));
+		System.out.println(m1 == m2);         //false
+		System.out.println(m1);
+		System.out.println(s1 == s2);		//false
+		
+		System.out.println(m1.equals(s2));	 //false
 		System.out.println("==========");
-		System.out.println(h1 == h2);
+		System.out.println(h1 == h2);		//true
 		
-		System.out.println(s1.equals(s2));
-		System.out.println(m1.equals(m2));
+		System.out.println(s1.equals(s2));	 //true
+		System.out.println(m1.equals(m2));	 //false
 		
-		System.out.println(m1.memberId == m2.memberId);
+		System.out.println(m1.memberId == m2.memberId); //true
 
 	}
 }

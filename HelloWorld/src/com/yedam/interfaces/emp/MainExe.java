@@ -1,8 +1,8 @@
 package com.yedam.interfaces.emp;
 
-import java.net.DatagramSocket;
+
 import java.util.InputMismatchException;
-import java.util.Iterator;
+		
 import java.util.List;
 import java.util.Scanner;
 
@@ -29,19 +29,22 @@ public class MainExe {
 
 
 		while (true) {
-			System.out.println("1.ver.Collection | 2.ver.Array");
+			System.out.println("1.ver.Collection | 2.ver.Array | 3.DBSet" );
 			System.out.println("선택 >> ");
 			int selecVer = Integer.parseInt(scn.nextLine());
-			if (selecVer < 1 || selecVer > 2) {
+			if (selecVer < 1 || selecVer > 3) {
 				System.out.println("유효한 값 선택하세요.");
 				continue;
 			} else if (selecVer == 1) {
 				dao = new EmpListExe();
 
 				break;
-			} else {
+			} else if(selecVer == 2){
 				dao = new EmpAryExe();
 
+				break;
+			}else {
+				dao = new EmpDBExe();
 				break;
 			}
 
