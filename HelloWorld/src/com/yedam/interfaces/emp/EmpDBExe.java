@@ -29,22 +29,22 @@ public class EmpDBExe implements EmpDAO {
 	@Override
 	public boolean registerEmp(Employee emp) {
 		String query = "inert into tbl_employees";
-		query += "values ("+emp.getEmpNo()+", "
-							+emp.getEmpNm()+", "
-							+emp.getTelNo()+", "
-							+emp.getHireDate()+", "
-							+emp.getSalary()+")";
+		query += "values (" + emp.getEmpNo() + ", " 
+		                    + emp.getEmpNm() + ", " 
+				            + emp.getTelNo() + ", " 
+		                    + emp.getHireDate()
+				+ ", "      + emp.getSalary() + ")";
 		try {
 			Statement stmt = getConnect().createStatement();
 			int r = stmt.executeUpdate(query);
-			if(r>0) {
+			if (r > 0) {
 				return true;
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return false;
 	}
 
@@ -65,15 +65,15 @@ public class EmpDBExe implements EmpDAO {
 		List<Employee> empList = new ArrayList<Employee>();
 		try {
 			Statement stmt = getConnect().createStatement();
-			ResultSet rs = stmt.executeQuery("select * from tbl_employees");
-			while(rs.next()) {
+			ResultSet rs = stmt.executeQuery("select * from tbl_employees where emp_name = nvl('"+emp.getEmpNm() +"',emp_name) order by emp_no desc");
+			while (rs.next()) {
 				Employee empl = new Employee();
 				empl.setEmpNo(rs.getInt("emp_no"));
 				empl.setEmpNm(rs.getString("emp_name"));
 				empl.setTelNo(rs.getString("tel_number"));
 				empl.setHireDate(rs.getDate("hire_date"));
 				empl.setSalary(rs.getInt("salary"));
-				
+
 				empList.add(empl);
 			}
 		} catch (SQLException e) {
