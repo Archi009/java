@@ -1,6 +1,7 @@
 package com.yedam.interfaces.emp;
 
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -28,12 +29,11 @@ public class EmpDBExe implements EmpDAO {
 
 	@Override
 	public boolean registerEmp(Employee emp) {
-		String query = "inert into tbl_employees";
-		query += "values (" + emp.getEmpNo() + ", " 
-		                    + emp.getEmpNm() + ", " 
-				            + emp.getTelNo() + ", " 
-		                    + emp.getHireDate()
-				+ ", "      + emp.getSalary() + ")";
+		String query = "insert into tbl_employees (emp_no,emp_name,tel_number)";
+		query += " values (" + emp.getEmpNo() + ",' " 
+		                    + emp.getEmpNm() + "', '" 
+				            + emp.getTelNo()  
+		                    + "')";
 		try {
 			Statement stmt = getConnect().createStatement();
 			int r = stmt.executeUpdate(query);
@@ -43,20 +43,56 @@ public class EmpDBExe implements EmpDAO {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
-		return false;
-	}
+		return true;
+	}//end of registerEmp
 
 	@Override
 	public boolean modfyEmp(Employee emp) {
-		// TODO Auto-generated method stub
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		String query = "update tbl_employees "
+				+ "set tel_number = nvl('"+emp.getTelNo()+"','010-2222'), "
+				+ " hire_date = case to_date('"+sdf.format(emp.getHireDate())+"','yyyy-mm-dd') when to_date('1900-01-01','yyyy-mm-dd') then hire_date"
+				+ " else to_date('"+sdf.format(emp.getHireDate())+"','yyyy-mm-dd')"
+				+ " end,"
+				+ " salary = case "+emp.getSalary()+" when 0 then salary"
+				+ " else "+emp.getSalary()+""
+				+ " end "
+				+ "where emp_no = " + emp.getEmpNo();
+		System.out.println(query);
+		try {
+			
+			Statement stmt = getConnect().createStatement();
+			
+			int r = stmt.executeUpdate(query);
+			if(r>0) 
+				return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
 	@Override
 	public boolean removeEmp(int empNo) {
-		// TODO Auto-generated method stub
+		String query = "delete from tbl_empolyees where emp_no = "+empNo;
+		try {
+			
+			Statement stmt = getConnect().createStatement();
+			
+			int r = stmt.executeUpdate(query);
+			if(r>0) 
+				return true;
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 

@@ -1,6 +1,7 @@
 package com.yedam.interfaces.emp;
 
 
+import java.text.SimpleDateFormat;
 import java.util.InputMismatchException;
 		
 import java.util.List;
@@ -17,6 +18,7 @@ public class MainExe {
 	static Scanner scn = new Scanner(System.in);
 	static int eNum = 0;
 	static EmpDAO dao;
+	
 	public static void main(String[] args) {
 //		스캐너, run
 		boolean run = true;
@@ -98,7 +100,7 @@ public class MainExe {
 				eName = scn.nextLine();
 				System.out.println("연락처 입력 >> ");
 				phNo = scn.nextLine();
-
+				
 				if (dao.registerEmp(new Employee(eNum, eName, phNo))) {
 					System.out.println("등록성공");
 					break;
@@ -134,8 +136,11 @@ public class MainExe {
 				break; // end of case 2.
 			case 3:
 				//삭제
+				System.out.println("삭제할 사원번호");
 				try {
-					remove();					
+				boolean r =	dao.removeEmp(Integer.parseInt(scn.nextLine()));	
+				if(r) System.out.println("삭제성공");
+				
 				} catch (NumberFormatException e) {
 					System.out.println("사원 번호 확인.");
 				}
